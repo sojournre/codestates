@@ -13,6 +13,9 @@ public class BfsConnectedVertices {
                 {3, 4},
                 {3, 5},
         };
+        Solution2 solution2 = new Solution2();
+        int result = solution2.connectedVertices(edges);
+        System.out.println("result = " + result);
 
     }
 }
@@ -35,9 +38,9 @@ class Solution2 {
         int[][] adjArray = new int[bigger[0] + 1][bigger[0] + 1];
 
         // edges를 순회하며, (무향 그래프이므로 쌍방으로) 간선을 연결해 줍니다.
-        for(int i = 0; i < edges.length; i++) {
-            int from = edges[i][0];
-            int to = edges[i][1];
+        for (int[] edge : edges) {
+            int from = edge[0];
+            int to = edge[1];
             adjArray[from][to] = 1;
             adjArray[to][from] = 1;
         }
@@ -54,8 +57,8 @@ class Solution2 {
                 //컴포넌트를 늘려주고
                 count++;
                 // 그래프와 버텍스, 방문했는지 확인할 visited를 bfs 혹은 dfs를 사용하여 변수에 담습니다.
-                visited = bfs_array(adjArray, vertex, visited);
-//                visited = dfs_array(adjArray, vertex, visited);
+//                visited = bfs_array(adjArray, vertex, visited);
+                visited = dfs_array(adjArray, vertex, visited);
             }
         }
         return count;
